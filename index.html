@@ -1,0 +1,296 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Atwenture!</title>
+		<style>
+
+			BODY {
+				background-color:#000;
+				color:#0f0;
+				font-family: monospace;
+				padding:10px;
+				font-size:16px;
+				line-height: 25px;
+			}
+
+			#tweetparse {
+				display:none;
+			}
+
+			.persistent-exit, .exit {
+				text-decoration: underline;
+				cursor: pointer;
+				color:#0f0;
+			}
+
+			.old-exit {
+				border-bottom:1px dashed #0f0;
+				text-decoration: none;
+				cursor: pointer;
+				color:#0f0;
+			}
+
+			.avatar {
+				display: inline-block;
+				width:30px;
+				height:30px;
+				background-size: cover;
+				border-radius:30px;					
+				-moz-border-radius:30px;					
+				-webkit-border-radius:30px;					
+				-o-border-radius:30px;					
+			}
+
+			.author {
+				background-image:url('data:image/png;base64,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');
+			}
+
+			#fx {
+				z-index: 1000;
+				position: fixed;
+				left:0;
+				right:0;
+				top:0;
+				bottom: 0;
+				pointer-events:none;
+				background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYZBzkHGELncwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAEklEQVQI12NgYGCwZWBgYGAAAAF4AD56413IAAAAAElFTkSuQmCC');
+			}
+
+		</style>
+	</head>
+	<body onload="getTweets()">
+		<div id="fx"></div>
+		<span id="tweetparse"></span>
+		<span id="console"></span>
+	</body>
+	<script>
+
+		var Config={
+			version:"0.1 beta", // Version of the software
+			user:"atwenture", // User used for hosting the world
+			localStorageKey:"localStorageKeySaveGame", // localStorage key used for restoring games.
+			handle:"614150352103972869", // Create a widget on twitter searching "@<user>" and copy the handle string from the URL.
+			tweetsCount:200 // Number of tweets used for building a game
+		};
+
+		var World={};
+
+		var Stats={
+			roomsCount:0,
+			deadendCount:0,
+			exitsCount:0,
+			deadExistCount:0,
+			descriptionsCount:0,
+			descriptionsAverage:0,
+			rooms:[],
+			neededRoomsCount:0,
+			neededRooms:{},
+			updated:0
+		};
+
+		var Tweets=[];
+
+		var lastid,script;
+
+		function print(html) {
+			var oldlinks=document.getElementsByClassName("exit");
+			while (oldlinks.length) {
+				oldlinks[0].setAttribute("onclick","");
+				oldlinks[0].setAttribute("target","");
+				oldlinks[0].setAttribute("href","#");
+				oldlinks[0].className="old-exit";
+			}
+			document.getElementById("console").innerHTML+=html;
+			window.scrollTo(0,document.body.scrollHeight);
+		}
+
+		function getTweerCb(cb) {
+			var curid,firstid,found,value,text,tweet,content=document.getElementById("tweetparse");
+			content.innerHTML=cb.body;
+			var list=content.getElementsByClassName("h-entry");
+			for (var i=0;i<list.length;i++) {
+				curid=list[i].getAttribute("data-tweet-id");
+				if (!firstid)
+					if (curid==lastid) break; else firstid=1;
+				found=true;
+				lastid=curid;			
+				text=list[i].getElementsByClassName("e-entry-title")[0].innerHTML.replace(/<[^>]*>/g,"");
+				tweet={
+					id:lastid,
+					user:list[i].getElementsByClassName("profile")[0].getElementsByClassName("p-name")[0].innerHTML,
+					nickname:list[i].getElementsByClassName("profile")[0].getElementsByClassName("p-nickname")[0].innerHTML.replace(/<[^>]*>/g,""),
+					avatar:list[i].getElementsByClassName("profile")[0].getElementsByClassName("avatar")[0].src,
+					text:text,
+					updated:list[i].getElementsByClassName("header")[0].getElementsByTagName("time")[0].innerHTML.replace(/<[^>]*>/g,""),
+					hash:[],
+					citation:[]
+				};
+				text.replace(/[@|#][^ ,.:;]+/g,function(token,pos){
+					value=token.substr(1).toLowerCase();
+					if(token[0]=="#") tweet.hash.push(value); else tweet.citation.push(value);
+				});
+				Tweets.push(tweet);
+			}
+			script.parentNode.removeChild(script);
+			content.innerHTML="";
+			if (found&&(Tweets.length<Config.tweetsCount))
+				getTweets();
+			else
+				start();
+		}
+
+		function getTweets() {
+			script=document.createElement("script");
+			if (lastid) {
+				print(" .");
+				script.src="https://syndication.twitter.com/widgets/timelines/paged/"+Config.handle+"?callback=getTweerCb&dnt=false&domain=dev.twitter.com&lang=en&max_id="+lastid+"&suppress_response_codes=true";
+			} else {
+				print("Loading game ...");
+				script.src="https://cdn.syndication.twimg.com/widgets/timelines/"+Config.handle+"?callback=getTweerCb&dnt=false&domain=dev.twitter.com&lang=en&suppress_response_codes=true";
+			}
+			document.getElementsByTagName("head")[0].appendChild(script);
+		}
+
+		function makeLink(href,label,persistent) {
+			return "<a target='_blank' href='"+href+"' class='"+(persistent?"persistent-exit":"exit")+"'>"+label+"</a>";
+		}
+
+		function composeTweet(text,label,persistent) {
+			return makeLink("https://twitter.com/intent/tweet?text="+encodeURIComponent(text),label,persistent);
+		}
+
+		function requestRoom(room,label,persistent) {
+			return composeTweet("Hey #"+Config.user+"makers! I need a #"+room+" room!",label,persistent)
+		}
+
+		function makeRoom(room,label,persistent) {
+			return composeTweet("@"+Config.user+" #"+room+": (Describe, put #destinations and @people in this room!)",label,persistent);
+		}
+
+		function gotoRoom(room,label,persistent) {
+			return "<span class='"+(persistent?"persistent-exit":"exit")+"' onclick='repl("+(room?"\""+room+"\"":"")+")'>"+label+"</span>";
+		}
+
+		function visit(user,label,persistent) {
+			return "<a target='_blank' class='"+(persistent?"persistent-exit":"exit")+"' href='http://twitter.com/"+user+"'>"+label+"</a>";
+		}
+
+		function talkWith(user,label,persistent) {
+			return composeTweet("@"+user+" #"+Config.user+" (Write here your message)",label,persistent)
+		}
+
+		function drawAvatar(className,user,image) {
+			return "<a target='_blank' href='http://twitter.com/"+user.substr(1)+"' title='"+user+"'><div class='avatar "+className+"' "+(image?"style='background-image:url(\""+image+"\")'":"")+"></div></a>"
+		}
+
+		function addNeededRoom(room) {
+			if (!Stats.neededRooms[room]) {
+				Stats.neededRoomsCount++;
+				Stats.neededRooms[room]=1;
+			}
+		}
+
+		function repl(position) {
+			var exitname,room,html="";
+			if ((position===undefined)&&Stats.rooms.length) {
+				html+="---<br><br><i>Respawning randomly!</i><br><br>";
+				position=Stats.rooms[Math.floor(Math.random()*Stats.rooms.length)];
+			}
+			if (position)
+				window.localStorage[Config.localStorageKey]=position;
+			room=World[position];
+			if (position)
+				html+="You are at <b>"+position+"</b>:<br>";
+			else
+				html+="You are... <b>nowhere!</b><br><br>";
+			if (room) {
+				for (var i=0;i<room.tweets.length;i++) 
+					html+=drawAvatar("",room.tweets[i].nickname,room.tweets[i].avatar)+" "+room.tweets[i].text+"<br>";
+				if (room.people.length) {
+					html+="<br>You see:<br>";
+					for (var i=0;i<room.people.length;i++)
+						html+="- "+room.people[i]+" ("+visit(room.people[i],"meet")+" or "+talkWith(room.people[i],"talk")+")<br>";
+				}
+				if (room.exits.length) {
+					html+="<br>You can go to:<br>";
+					for (var i=0;i<room.exits.length;i++)
+						html+="- "+gotoRoom(room.exits[i],room.exits[i])+"<br>";
+					html+="<br>";
+				} else
+					html+="<br>It looks like you're stuck here... <b>Game over!</b> You can come back here later, ask "+requestRoom(position,"help")+", "+makeRoom(position,"modify")+" this room or "+gotoRoom(0,"play again")+".<br><br>"; 
+			} else {
+				exitname=position||"roomName";
+				html+="<i>It looks like you're in an empty place! "+makeRoom(position,"Create")+" a room or "+requestRoom(position,"request it to someone else")+"! Do you prefer to give up and "+gotoRoom(0,"play again")+"?</i><br><br>";
+			}
+			print(html);			
+		}
+
+		function start() {
+			var position,firstroom,room;
+			for (var i=0;i<Tweets.length;i++)
+				if (Tweets[i].hash.length&&Tweets[i].citation.length&&(Tweets[i].citation[0].toLowerCase()==Config.user)) {
+					room=Tweets[i].hash[0];
+					if (room) {
+						if (!Stats.updated) Stats.updated=Tweets[i].updated;
+						Stats.rooms.push(room);
+						if (!firstroom) firstroom=room;
+						if (!World[room]) World[room]={
+							tweets:[],
+							exitsindex:{},
+							exits:[],
+							peopleindex:{},
+							people:[],
+							authorsindex:{},
+							authors:[]
+						};
+						World[room].tweets.push(Tweets[i]);
+						for (var j=1;j<Tweets[i].hash.length;j++)
+							if (!World[room].exitsindex[Tweets[i].hash[j]]) {
+								World[room].exitsindex[Tweets[i].hash[j]]=1;
+								World[room].exits.push(Tweets[i].hash[j]);
+							}
+						for (var j=1;j<Tweets[i].citation.length;j++)
+							if (!World[room].peopleindex[Tweets[i].citation[j]]) {
+								World[room].peopleindex[Tweets[i].citation[j]]=1;
+								World[room].people.push(Tweets[i].citation[j]);
+							}
+					}
+				}
+			for (var a in World) {
+				room=World[a];
+				if (!room.exits.length) Stats.deadendCount++;
+				Stats.descriptionsCount+=room.tweets.length;
+				if (room.exits.length)
+					for (var j=0;j<room.exits.length;j++) {
+						Stats.exitsCount++;
+						if (!World[room.exits[j]]) {
+							Stats.deadExistCount++;	
+							addNeededRoom(room.exits[j]);		
+						}
+					}
+				else
+					addNeededRoom(a);
+			}
+
+			Stats.roomsCount=Stats.rooms.length;
+			Stats.descriptionsAverage=Math.floor(Stats.descriptionsCount/Stats.roomsCount);
+			Stats.exitQuality=Math.round((1-(Stats.deadExistCount/Stats.exitsCount))*100)||0;
+			Stats.roomsQuality=Math.round((1-(Stats.deadendCount/Stats.roomsCount))*100)||0;
+			Stats.worldQuality=Math.round((Stats.exitQuality+Stats.roomsQuality)/2)||0;
+
+			var html="";
+			html+="<br><br>Welcome to <b>Awenture</b> "+Config.version+"! (c)2015 by "+drawAvatar("author","@kesiev")+" <a class='persistent-exit' target='_blank' href='http://www.kesiev.com'>KesieV</a><br>An "+makeLink("https://github.com/kesiev/Atwenture","open-sourced",true)+" surreal social-collaborative Twitter-based text adventure that changes unpredictably. You can create a new room with a "+makeRoom("roomName","tweet",true)+".<br>";
+			html+="<br>We're using the <b>@"+Config.user+"</b> user for creating this world. The world "+(Stats.updated?"was updated <b>"+Stats.updated+"</b> ago and ":"")+"is <b>"+Stats.roomsCount+" room"+(Stats.roomsCount!=1?"s":"")+" big</b>, with a <b>"+Stats.worldQuality+"% estimated overall quality</b>.<br>";
+			if (Stats.neededRoomsCount) {
+				html+="Do you feel creative? Why don't you create some rooms? Do you want some suggestions?<br>Try ";
+				for (var a in Stats.neededRooms)
+					html+=makeRoom(a,a,true)+", ";
+				html=html.substr(0,html.length-2)+".<br>";
+			}
+			print(html+"<br>");
+			repl(window.localStorage[Config.localStorageKey]);
+		}
+
+
+	</script>
+</html>
