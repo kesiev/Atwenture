@@ -125,7 +125,7 @@
 					hash:[],
 					citation:[]
 				};
-				text.replace(/[@|#][^ ,.:;]+/g,function(token,pos){
+				text.replace(/[@|#][a-zA-Z0-9]+/g,function(token,pos){
 					value=token.substr(1).toLowerCase();
 					if(token[0]=="#") tweet.hash.push(value); else tweet.citation.push(value);
 				});
