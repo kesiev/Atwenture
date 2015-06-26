@@ -206,6 +206,7 @@
 			if (room) {
 				for (var i=0;i<room.tweets.length;i++) 
 					html+=drawAvatar("",room.tweets[i].nickname,room.tweets[i].avatar)+" "+room.tweets[i].text+"<br>";
+				html+="(Not enough? Add "+makeRoom(position,"your own details")+" or "+requestRoom(position,"ask for more")+".)<br>";
 				if (room.people.length) {
 					html+="<br>You see:<br>";
 					for (var i=0;i<room.people.length;i++)
@@ -217,10 +218,10 @@
 						html+="- "+gotoRoom(room.exits[i],room.exits[i])+"<br>";
 					html+="<br>";
 				} else
-					html+="<br>It looks like you're stuck here... <b>Game over!</b> You can come back here later, ask "+requestRoom(position,"help")+", "+makeRoom(position,"modify")+" this room or "+gotoRoom(0,"play again")+".<br><br>"; 
+					html+="<br>It looks like you're stuck here so... <b>Game over!</b> You can come back to this page later and see what changed, ask for "+requestRoom(position,"help")+", "+makeRoom(position,"describe this room better")+" to make your own exit or "+gotoRoom(0,"play again")+".<br><br>"; 
 			} else {
 				exitname=position||"roomName";
-				html+="<i>It looks like you're in an empty place! "+makeRoom(position,"Create")+" a room or "+requestRoom(position,"request it to someone else")+"! Do you prefer to give up and "+gotoRoom(0,"play again")+"?</i><br><br>";
+				html+="<i>It looks like you're in an empty place! You can come back to this page later and see what changed, "+makeRoom(position,"Create")+" a room or "+requestRoom(position,"request it to someone else")+"! Do you prefer to give up and "+gotoRoom(0,"play again")+"?</i><br><br>";
 			}
 			print(html);			
 		}
