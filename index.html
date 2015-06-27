@@ -244,7 +244,7 @@
 							authorsindex:{},
 							authors:[]
 						};
-						World[room].tweets.push(Tweets[i]);
+						World[room].tweets.unshift(Tweets[i]);
 						for (var j=1;j<Tweets[i].hash.length;j++)
 							if (!World[room].exitsindex[Tweets[i].hash[j]]) {
 								World[room].exitsindex[Tweets[i].hash[j]]=1;
