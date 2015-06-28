@@ -281,7 +281,7 @@
 
 			var html="";
 			html+="<br><br>Welcome to <b>Atwenture</b> "+Config.version+"! (c)2015 by "+drawAvatar("author","@kesiev")+" <a class='persistent-exit' target='_blank' href='http://www.kesiev.com'>KesieV</a><br>An "+makeLink("https://github.com/kesiev/Atwenture","open-sourced",true)+" surreal social-collaborative Twitter-based text adventure that changes unpredictably. You can create a new room with a "+makeRoom("roomName","tweet",true)+".<br>";
-			html+="<br>We're using the <b>@"+Config.user+"</b> user for creating this world. The world "+(Stats.updated?"was updated <b>"+Stats.updated+"</b> ago and ":"")+"is <b>"+Stats.roomsCount+" room"+(Stats.roomsCount!=1?"s":"")+" big</b>, with a <b>"+Stats.worldQuality+"% estimated overall quality</b>.<br>";
+			html+="<br>We're using the <b>@"+Config.user+"</b> user for creating this world. "+(Stats.updated?"Last change is dated <b>"+Stats.updated+"</b> and the world ":"The world ")+"is <b>"+Stats.roomsCount+" room"+(Stats.roomsCount!=1?"s":"")+" big</b>, with a <b>"+Stats.worldQuality+"% estimated overall quality</b>.<br>";
 			if (Stats.neededRoomsCount) {
 				html+="Do you feel creative? Why don't you create some rooms? Do you want some suggestions?<br>Try ";
 				for (var a in Stats.neededRooms)
